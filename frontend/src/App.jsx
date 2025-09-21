@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import { useState } from "react";
 
 const App = () => {
@@ -18,7 +19,27 @@ const App = () => {
   const [generatedReply, SetGeneratedReply] = useState("");
   const [loading, setLoading] = useState();
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/email/generate",
+        {
+          emailContent,
+          tone,
+        }
+      );
+      SetGeneratedReply(
+        typeof response.data == "string"
+          ? response.data
+          : JSON.stringify(response.data)
+      );
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
