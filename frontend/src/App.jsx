@@ -15,6 +15,7 @@ import { useState } from "react";
 const App = () => {
   const [emailContent, setEmailContent] = useState("");
   const [tone, setTone] = useState("");
+  const [generatedReply, SetGeneratedReply] = useState("");
   const [loading, setLoading] = useState();
 
   const handleSubmit = async () => {};
@@ -59,6 +60,24 @@ const App = () => {
             {loading ? <CircularProgress size={24} /> : "Generate Reply"}
           </Button>
         </Box>
+
+        <Box sx={{ mt: 3 }}>
+          <TextField
+            fullWidth
+            multiline
+            rows={6}
+            variant="outlined"
+            value={generatedReply || ""}
+            inputProps={{ readOnly: true }}
+            sx={{ mb: 2 }}
+          />
+        </Box>
+        <Button
+          variant="outline"
+          onClick={() => navigator.clipboard.write(generatedReply)}
+        >
+          Copy to Clipboard
+        </Button>
       </Container>
     </>
   );
