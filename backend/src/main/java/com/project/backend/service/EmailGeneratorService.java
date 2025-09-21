@@ -47,14 +47,14 @@ public class EmailGeneratorService {
                 .bodyToMono( String.class )
                 .block();
 
-      return extractResponseContent(response);
+        return extractResponseContent(response);
     }
 
     private String extractResponseContent(String response) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree( response );
-           return root.path( "candidates" )
+            return root.path( "candidates" )
                     .get( 0 )
                     .path( "content" )
                     .path( "parts" )
