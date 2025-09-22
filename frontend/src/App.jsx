@@ -80,25 +80,24 @@ const App = () => {
           >
             {loading ? <CircularProgress size={24} /> : "Generate Reply"}
           </Button>
+          <Box sx={{ mt: 3 }}>
+            <TextField
+              fullWidth
+              multiline
+              rows={6}
+              variant="outlined"
+              value={generatedReply || ""}
+              inputProps={{ readOnly: true }}
+              sx={{ mb: 2 }}
+            />
+          </Box>
+          <Button
+            variant="contained"
+            onClick={() => navigator.clipboard.writeText(generatedReply)}
+          >
+            Copy to clipboard
+          </Button>
         </Box>
-
-        <Box sx={{ mt: 3 }}>
-          <TextField
-            fullWidth
-            multiline
-            rows={6}
-            variant="outlined"
-            value={generatedReply || ""}
-            inputProps={{ readOnly: true }}
-            sx={{ mb: 2 }}
-          />
-        </Box>
-        <Button
-          variant="outline"
-          onClick={() => navigator.clipboard.write(generatedReply)}
-        >
-          Copy to Clipboard
-        </Button>
       </Container>
     </>
   );
